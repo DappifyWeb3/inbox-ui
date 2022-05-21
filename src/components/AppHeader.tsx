@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { getHeader, getCollapseIcon } from "@mui-treasury/layout";
 import { useSizedIconButtonStyles } from "@mui-treasury/styles/iconButton/sized";
@@ -50,6 +50,7 @@ const useStyles = makeStyles({
 declare global {
   interface Window {
     ethereum: any; // 👈️ turn off type checking
+    heap: any;
   }
 }
 
@@ -64,6 +65,11 @@ const AppHeader = () => {
   });
   const googleStyles = useGoogleAvatarStyles({ avatarSize: 32, ringSize: 40 });
   const avatarStyles = useSizedIconButtonStyles({ padding: 4, childSize: 32 });
+
+  useEffect(() => {
+    if (isAuthenticated && user)
+      window.heap.identify(user.get('ethAddress'));
+  }, [isAuthenticated, user]);
 
   const authUser = () => {
     if (typeof window?.ethereum !== 'undefined') {
