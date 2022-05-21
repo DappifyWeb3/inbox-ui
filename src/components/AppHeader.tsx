@@ -51,6 +51,7 @@ declare global {
   interface Window {
     ethereum: any; // 👈️ turn off type checking
     heap: any;
+    pendo: any;
   }
 }
 
@@ -69,6 +70,7 @@ const AppHeader = () => {
   useEffect(() => {
     if (isAuthenticated && user)
       window.heap.identify(user.get('ethAddress'));
+      window.pendo.initialize({ account: { id: user?.get('ethAddress') }});
   }, [isAuthenticated, user]);
 
   const authUser = () => {
