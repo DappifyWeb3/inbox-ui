@@ -1,0 +1,3 @@
+[submodule "src/react-dappify"]
+	path = src/react-dappify
+	url = https://github.com/DappifyWeb3/react-dappify.git
